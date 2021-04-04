@@ -7,7 +7,10 @@
     "build": "yarn run build:tailwind && rollup -c",
     "start": "sirv public -s",
     "serve": "serve public -p 80",
-    "dev": "concurrently \"rollup -c -w\" \"yarn run watch:tailwind\""
+    "dev": "concurrently \"rollup -c -w\" \"yarn run watch:tailwind\"",
+    "clean": "yarn clean.npm && yarn clean.lockfiles",
+    "clean.npm": "find . -name \"node_modules\" -exec rm -rf '{}' +",
+    "clean.lockfiles": "find . -name \"package-lock.json\" -exec rm -rf '{}' +"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^12.0.0",

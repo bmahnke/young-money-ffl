@@ -9,7 +9,13 @@ const league = async function(season: Number) {
   return p
 }
 
+const teams = async function(season: Number, week: Number) {
+  let p = await espnClient.getTeamsAtWeek({ seasonId: season, scoringPeriodId: week });
+  return p;
+}
+
 const EspnApi = {
-  league
+  league,
+  teams
 }
 export default EspnApi;
