@@ -1,14 +1,19 @@
 <script lang="ts">
+  import { onDestroy } from 'svelte'
+  import { week } from '../store';
   import EspnApi from '../services/espn_api';
   import Team from '../components/teams/Team.svelte'
   import { dayjs } from '../lib/dayjs';
 
   const leagueId = 272834;
   const seasonId = 2019;
+  let currentWeek
+
+  const unsubscribe = week.subscribe(value => (currentWeek = value));
+  onDestroy(unsubscribe);
 
   // http://fantasy.espn.com/apis/v3/games/ffl/seasons/2019/segments/0/leagues/272834?view=mSettings
-
-  let url = 'http://fantasy.espn.com/apis/v3/games/ffl/seasons/2019/segments/0/leagues/272834?view=mSettings'
+  // let url = 'http://fantasy.espn.com/apis/v3/games/ffl/seasons/2019/segments/0/leagues/272834?view=mSettings'
 
   $: visibleTeam = undefined;
   function onTeamRequestVisibilityChange(event) {
@@ -32,7 +37,7 @@
     {/await}
   </main>
 
-  {#await EspnApi.teams(seasonId, 3)}
+  {#await EspnApi.teams(seasonId, currentWeek)}
     <!-- promise is pending -->
     <p>waiting for the promise to resolve...</p>
   {:then teams}
