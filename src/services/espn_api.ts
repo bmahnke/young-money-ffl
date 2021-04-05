@@ -14,8 +14,14 @@ const teams = async function(season: Number, week: Number) {
   return p;
 }
 
+const freeAgents = async function(season: Number, week: Number) {
+  let p = await espnClient.getFreeAgents({ seasonId: season, scoringPeriodId: week })
+  return p;
+}
+
 const EspnApi = {
   league,
-  teams
+  teams,
+  freeAgents
 }
 export default EspnApi;
