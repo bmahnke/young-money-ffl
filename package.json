@@ -35,6 +35,7 @@
     "axios": "0.21.1",
     "dayjs": "^1.10.4",
     "espn-fantasy-football-api": "^0.16.1",
+    "rollup-plugin-node-polyfills": "^0.2.1",
     "sirv-cli": "^1.0.0",
     "svelte-routing": "^1.5.0"
   },

@@ -20,16 +20,12 @@ let season = readable(2019, set => {
   return () => {};
 });
 
-const getFreeAgents = async () => {
-  const result = await EspnApi.freeAgents(get(season), get(week));
-  return result;
-}
-
 let freeAgentsLoading = writable(false);
-let freeAgents = readable([], set => {
+let freeAgents = readable([], async (set) => {
   freeAgentsLoading.set(true);
   
-  getFreeAgents().then(results => {
+  EspnApi.freeAgents(get(season), get(week))
+  .then(results => {
     set(results);
   }).finally(() => {
     freeAgentsLoading.set(false);
