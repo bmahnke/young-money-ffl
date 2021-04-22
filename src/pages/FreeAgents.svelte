@@ -1,6 +1,8 @@
 <script lang="ts">
   import { freeAgents, freeAgentsLoading } from "../store";
   import Card from "../components/ui/Card.svelte";
+  import Icon from "../components/ui/Icon.svelte";
+  import InjuryStatus from "../components/players/InjuryStatus.svelte"
 
   $: offset = 0;
 
@@ -8,6 +10,8 @@
     event.preventDefault();
     offset = page;
   }
+
+  console.log('free agent', $freeAgents[9]);
 </script>
 
 <div>
@@ -27,45 +31,55 @@
           <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
               <div class="shadow overflow-hidden border-b border-gray-200">
-                <table class="min-w-full divide-y divide-gray-200">
+                <table class="min-w-full table-auto divide-y divide-gray-200">
                   <thead class="bg-gray-50">
                     <tr>
-                      <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th scope="col">
                         Name
                       </th>
-                      <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th scope="col">
                         Team
                       </th>
-                      <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Status
+                      <th scope="col">
+                        Availability
                       </th>
-                      <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th scope="col">
+                        Injury Status
+                      </th>
+                      <th scope="col">
                         Position
                       </th>
                     </tr>
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
-                    {#each $freeAgents.slice(offset * 10, (offset + 1) * 10) as agent}
+                    {#each $freeAgents.slice(offset * 10, (offset + 1) * 10) as agent (agent.player.id)}
                       <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                          <div class="flex items-center">
-                            <div class="ml-4">
-                              <div class="text-sm font-medium text-gray-900">
-                                {agent.player.fullName}
-                              </div>
-                            </div>
+                        <td class="px-6 py-4 text-left whitespace-nowrap">
+                          <p class="text-sm font-medium text-gray-900">
+                            {agent.player.fullName}
+                          </p>
+                        </td>
+                        <td class="px-6 py-4 text-left whitespace-nowrap">
+                          <p class="text-sm text-gray-900">{agent.player.proTeam}</p>
+                        </td>
+                        <td class="px-6 py-4 text-left whitespace-nowrap">
+                          <div class="flex flex-row">
+                            {#if agent.player.availabilityStatus == "FREEAGENT" }
+                              <p class="text-sm font-medium mt-1 mr-1">Available</p>
+                              <Icon name="check" color="green" />
+                            {:else if agent.player.availabilityStatus == "WAIVERS" }
+                              <p class="text-sm font-medium mt-1 mr-1">Waivers</p>
+                              <Icon name="clock" color="yellow" shape="circle" shade="300" />
+                            {/if}
                           </div>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                          <div class="text-sm text-gray-900">{agent.player.proTeam}</div>
+                        <td class="px-6 py-4 text-left whitespace-nowrap">
+                          {#if agent.player.defaultPosition !== "D/ST"}
+                            <InjuryStatus status={agent.player.injuryStatus} />
+                          {/if}
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                          <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                            Available
-                          </span>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                          {agent.player.defaultPosition}
+                        <td class="px-6 py-4 text-left whitespace-nowrap text-sm text-gray-500">
+                          <p>{agent.player.defaultPosition}</p>
                         </td>
                       </tr>
                     {/each}
@@ -86,17 +100,27 @@
             Next
           </a>
         </div>
-        <!-- <div>
-          <a href="next" on:click={(e) => move(e, offset + 1)} class="page-move">
-            Next
-          </a>
-        </div> -->
       </div>
     </Card>
   </div>
 </div>
 
 <style>
+
+  th {
+    padding-left: 1.5rem/* 24px */;
+    padding-right: 1.5rem/* 24px */;
+    padding-top: 0.75rem/* 12px */;
+    padding-bottom: 0.75rem/* 12px */;
+    font-size: 0.75rem/* 12px */;
+    font-weight: 500;
+    --text-opacity: 1;
+    color: #a0aec0;
+    color: rgba(160, 174, 192, var(--text-opacity));
+    text-align: left;
+    text-transform: uppercase;
+  }
+
   h1 {
     color: #ff3e00;
     text-transform: uppercase;

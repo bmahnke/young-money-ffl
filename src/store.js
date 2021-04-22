@@ -3,9 +3,9 @@ import { schedule } from './constants/nfl_schedule';
 import { dayjs } from './lib/dayjs';
 
 import EspnApi from "./services/espn_api"
- 
+
 function unsubscribe() {
-	// Nothing to do in this case
+  // Nothing to do in this case
 }
 
 let week = readable(1, set => {
@@ -26,36 +26,33 @@ let season = readable(2019, set => {
 
 
 function makeFreeAgentStore() {
-	let initial = [];
+  let initial = [];
   freeAgentsLoading.set(true);
-	let store = readable(initial, makeSubscribe(initial, {})); 
-	return store;
+  let store = readable(initial, makeSubscribe(initial, {}));
+  return store;
 }
 
 function makeSubscribe(data, _args) {
-	return set => {
-		fetchFreeAgents(data, set);
-		return unsubscribe;
-	};
+  return set => {
+    fetchFreeAgents(data, set);
+    return unsubscribe;
+  };
 }
 
 async function fetchFreeAgents(data, set) {
-		// 5. Dispatch the request for the users
-	  const response = await EspnApi.freeAgents(get(season), get(week));
-    set(response);
-    freeAgentsLoading.set(false);
-  }
+  const response = await EspnApi.freeAgents(get(season), get(week));
+  set(response);
+  freeAgentsLoading.set(false);
+}
 
 let freeAgentsLoading = writable(false);
 let freeAgents = makeFreeAgentStore();
 let viewNflWeek = writable(0);
-let darkTheme = writable(true);
 
 export {
   week,
   viewNflWeek,
   season,
   freeAgents,
-  freeAgentsLoading,
-  darkTheme
+  freeAgentsLoading
 }
