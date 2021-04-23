@@ -25,9 +25,13 @@
     * Game/Season Stats
 * History page
   * POST 2021 Season...
+* Matchups
+  * Update matchups every 2-5 seconds, displays scores, etc.
 * Free Agents
   * Free Agent list table
     * Sortable by total points, projected points, points last week
 * Fun Page
   * Last week results by charts
     * something like: https://stmorse.github.io/journal/espn-fantasy-v3.html
+* Adding .env variables:
+  * https://linguinecode.com/post/how-to-add-environment-variables-to-your-svelte-js-app

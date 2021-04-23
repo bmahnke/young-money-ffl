@@ -36,8 +36,8 @@
        <Link to="free-agents">Free Agents</Link>
      </nav>
      <div>
-       <Route path="free-agents" component="{FreeAgents}" />
-       <Route path="about" component="{About}" />
+       <Route path="free-agents"><FreeAgents/></Route>
+       <Route path="about"><About /></Route>
        <!--for now the router just support case sensitive,
            one workaround colud be add two time the route
            Example.
