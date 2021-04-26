@@ -7,6 +7,26 @@
   export let url = ""; //This property is necessary declare to avoid ignore the Router
 </script>
 
+<main class="bg-gray-100 p-8">
+  <Router {url}>
+    <nav>
+      <Link to="/">Home</Link>
+      <Link to="about">About</Link>
+      <Link to="free-agents">Free Agents</Link>
+    </nav>
+    <div>
+      <Route path="free-agents"><FreeAgents /></Route>
+      <Route path="about"><About /></Route>
+      <!--for now the router just support case sensitive,
+           one workaround colud be add two time the route
+           Example.
+          <Route path="About" component="{About}" /> 
+       -->
+      <Route path="/"><Home /></Route>
+    </div>
+  </Router>
+</main>
+
 <style>
   main {
     text-align: center;
@@ -27,23 +47,3 @@
     }
   }
 </style>
-
-<main class="bg-gray-100 p-8">
-  <Router url="{url}">
-    <nav>
-       <Link to="/">Home</Link>
-       <Link to="about">About</Link>
-       <Link to="free-agents">Free Agents</Link>
-     </nav>
-     <div>
-       <Route path="free-agents"><FreeAgents/></Route>
-       <Route path="about"><About /></Route>
-       <!--for now the router just support case sensitive,
-           one workaround colud be add two time the route
-           Example.
-          <Route path="About" component="{About}" /> 
-       -->
-       <Route path="/"><Home /></Route>
-     </div>
-   </Router>
-</main>

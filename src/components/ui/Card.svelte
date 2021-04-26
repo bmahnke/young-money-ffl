@@ -1,34 +1,36 @@
 <script lang="ts">
-  export let margin = "small"
-  export let padding = "small"
+  export let margin = "small";
+  export let padding = "small";
 </script>
 
-<div class={`wrap bg-white padding-${padding} margin-${margin} shadow overflow-hidden rounded-lg`}>
-  <slot></slot>
+<div
+  class={`wrap bg-white padding-${padding} margin-${margin} shadow overflow-hidden rounded-lg`}
+>
+  <slot />
 </div>
 
 <style>
-  .padding-none{
+  .padding-none {
     margin: 0;
   }
 
-  .padding-small{
+  .padding-small {
     margin: 0.5rem;
   }
 
-  .padding-medium{
+  .padding-medium {
     margin: 1rem;
   }
 
-  .margin-none{
+  .margin-none {
     margin: 0;
   }
 
-  .margin-small{
+  .margin-small {
     margin: 0.5rem;
   }
 
-  .margin-medium{
+  .margin-medium {
     margin: 1rem;
   }
 </style>
