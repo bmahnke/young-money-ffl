@@ -2,7 +2,7 @@
   import { freeAgents, freeAgentsLoading } from "../store";
   import Card from "../components/ui/Card.svelte";
   import Icon from "../components/ui/Icon.svelte";
-  import InjuryStatus from "../components/players/InjuryStatus.svelte"
+  import InjuryStatus from "../components/players/InjuryStatus.svelte";
 
   $: offset = 0;
 
@@ -11,17 +11,19 @@
     offset = page;
   }
 
-  console.log('free agent', $freeAgents[9]);
+  console.log("free agent", $freeAgents[9]);
 </script>
 
 <div>
-  <h1>Free Agents</h1>
-  <div>
-    {#if $freeAgentsLoading}
-      <p>Free Agents Loading...</p>
-    {:else}
-      <p>There are {$freeAgents.length} available!</p>
-    {/if}
+  <div class="page-header">
+    <h1>Free Agents</h1>
+    <div>
+      {#if $freeAgentsLoading}
+        <p>Free Agents Loading...</p>
+      {:else}
+        <p>There are {$freeAgents.length} available!</p>
+      {/if}
+    </div>
   </div>
 
   <div>
@@ -29,26 +31,18 @@
       <section>
         <div class="flex flex-col">
           <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+            <div
+              class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
+            >
               <div class="shadow overflow-hidden border-b border-gray-200">
                 <table class="min-w-full table-auto divide-y divide-gray-200">
                   <thead class="bg-gray-50">
                     <tr>
-                      <th scope="col">
-                        Name
-                      </th>
-                      <th scope="col">
-                        Team
-                      </th>
-                      <th scope="col">
-                        Availability
-                      </th>
-                      <th scope="col">
-                        Injury Status
-                      </th>
-                      <th scope="col">
-                        Position
-                      </th>
+                      <th scope="col"> Name </th>
+                      <th scope="col"> Team </th>
+                      <th scope="col"> Availability </th>
+                      <th scope="col"> Injury Status </th>
+                      <th scope="col"> Position </th>
                     </tr>
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
@@ -60,16 +54,27 @@
                           </p>
                         </td>
                         <td class="px-6 py-4 text-left whitespace-nowrap">
-                          <p class="text-sm text-gray-900">{agent.player.proTeam}</p>
+                          <p class="text-sm text-gray-900">
+                            {agent.player.proTeam}
+                          </p>
                         </td>
                         <td class="px-6 py-4 text-left whitespace-nowrap">
                           <div class="flex flex-row">
-                            {#if agent.player.availabilityStatus == "FREEAGENT" }
-                              <p class="text-sm font-medium mt-1 mr-1">Available</p>
+                            {#if agent.player.availabilityStatus == "FREEAGENT"}
+                              <p class="text-sm font-medium mt-1 mr-1">
+                                Available
+                              </p>
                               <Icon name="check" color="green" />
-                            {:else if agent.player.availabilityStatus == "WAIVERS" }
-                              <p class="text-sm font-medium mt-1 mr-1">Waivers</p>
-                              <Icon name="clock" color="yellow" shape="circle" shade="300" />
+                            {:else if agent.player.availabilityStatus == "WAIVERS"}
+                              <p class="text-sm font-medium mt-1 mr-1">
+                                Waivers
+                              </p>
+                              <Icon
+                                name="clock"
+                                color="yellow"
+                                shape="circle"
+                                shade="300"
+                              />
                             {/if}
                           </div>
                         </td>
@@ -78,7 +83,9 @@
                             <InjuryStatus status={agent.player.injuryStatus} />
                           {/if}
                         </td>
-                        <td class="px-6 py-4 text-left whitespace-nowrap text-sm text-gray-500">
+                        <td
+                          class="px-6 py-4 text-left whitespace-nowrap text-sm text-gray-500"
+                        >
                           <p>{agent.player.defaultPosition}</p>
                         </td>
                       </tr>
@@ -90,13 +97,23 @@
           </div>
         </div>
       </section>
-      <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+      <div
+        class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
+      >
         <div class="flex-1 flex justify-between">
-          <a href="page" on:click={(e) => move(e, offset - 1)} style={offset == 0 ? 'pointer-events: none;' : ''} class="page-move" >
+          <a
+            href="page"
+            on:click={(e) => move(e, offset - 1)}
+            style={offset == 0 ? "pointer-events: none;" : ""}
+            class="page-move"
+          >
             Previous
           </a>
-          <a href="next"
-            on:click={(e) => move(e, offset + 1)} class="page-move">
+          <a
+            href="next"
+            on:click={(e) => move(e, offset + 1)}
+            class="page-move"
+          >
             Next
           </a>
         </div>
@@ -106,13 +123,12 @@
 </div>
 
 <style>
-
   th {
-    padding-left: 1.5rem/* 24px */;
-    padding-right: 1.5rem/* 24px */;
-    padding-top: 0.75rem/* 12px */;
-    padding-bottom: 0.75rem/* 12px */;
-    font-size: 0.75rem/* 12px */;
+    padding-left: 1.5rem /* 24px */;
+    padding-right: 1.5rem /* 24px */;
+    padding-top: 0.75rem /* 12px */;
+    padding-bottom: 0.75rem /* 12px */;
+    font-size: 0.75rem /* 12px */;
     font-weight: 500;
     --text-opacity: 1;
     color: #a0aec0;

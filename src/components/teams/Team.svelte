@@ -25,7 +25,7 @@
       <img
         class="h-10 w-10 rounded-full mt-1 mr-2"
         src={team.logoURL}
-        alt={team.logoURL.split('/').pop()}
+        alt={team.logoURL.split("/").pop()}
       />
 
       <h3>
