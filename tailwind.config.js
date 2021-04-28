@@ -1,6 +1,19 @@
+const colors = require('tailwindcss/colors')
+
 module.exports = {
-  purge: ["./src/**/*.svelte", "./src/**/*.html"],
+  darkMode: false,
   theme: {
+    colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      black: colors.black,
+      white: colors.white,
+      gray: colors.coolGray,
+      indigo: colors.indigo,
+      red: colors.rose,
+      green: colors.emerald,
+      yellow: colors.amber,
+    },
     extend: {},
   },
   variants: {},

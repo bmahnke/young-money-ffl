@@ -59,7 +59,7 @@
                           </p>
                         </td>
                         <td class="px-6 py-4 text-left whitespace-nowrap">
-                          <div class="flex flex-row">
+                          <div class="flex flex-row items-center">
                             {#if agent.player.availabilityStatus == "FREEAGENT"}
                               <p class="text-sm font-medium mt-1 mr-1">
                                 Available
