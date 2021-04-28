@@ -19,7 +19,7 @@
 </script>
 
 <span
-  class={`p-1 inline-flex text-xs leading-5 font-semibold ${
+  class={`p-1 inline-flex font-semibold ${
     shape == "circle" ? "rounded-full" : ""
   } ${usedColor()}`}
 >

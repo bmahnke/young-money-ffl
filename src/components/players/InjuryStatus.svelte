@@ -11,7 +11,7 @@
 
 </script>
     
-<div class="flex flex-row">
+<div class="flex flex-row items-center">
   <p class="text-sm font-medium mt-1 mr-1">{textStatus}</p>
   <Icon name={icon}
         color={color}
